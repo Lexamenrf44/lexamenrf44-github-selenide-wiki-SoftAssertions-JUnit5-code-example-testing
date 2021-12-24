@@ -27,6 +27,7 @@
 .idea
 .allure/
 .gradle/
+gradle/wrapper
 allure-results/
 gradle/
 build/
