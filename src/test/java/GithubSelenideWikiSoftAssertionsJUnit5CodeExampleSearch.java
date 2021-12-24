@@ -11,8 +11,6 @@ import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
 public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
 
     @BeforeAll
@@ -29,7 +27,7 @@ public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
     }
 
     @Test
-    @Order(1)
+
     void GithubSelenideWikiSearch() {
 
         $("[data-test-selector=nav-search-input]").setValue("Selenide").pressEnter();
@@ -38,21 +36,15 @@ public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
 
         $("[data-content='Wiki']").shouldBe(visible);
 
-    }
-
-    @Test
-    @Order(2)
-    void SoftAssertionLinkSearch() {
-
         $("[data-content='Wiki']").click();
 
-        $("[class='markdown-body']").$(byText("Soft assertions")).shouldBe(visible);
+        $(".js-wiki-more-pages-link").click();
 
-    }
+        sleep(3000);
 
-    @Test
-    @Order(3)
-    void SoftAssertionJUnit5ExampleSearch() {
+        $(byText("SoftAssertions")).shouldBe(visible);
+
+        sleep(3000);
 
         $(byText("Soft assertions")).click();
 
