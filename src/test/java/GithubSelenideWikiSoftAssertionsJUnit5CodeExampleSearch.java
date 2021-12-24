@@ -1,13 +1,10 @@
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.conditions.Text;
-import com.codeborne.selenide.conditions.Visible;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Browsers.CHROME;
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.baseUrl;
-import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -18,7 +15,6 @@ public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
 
         Configuration.browser = CHROME;
         Configuration.fastSetValue = false;
-        // Configuration.browserSize = "1920x1080";
         baseUrl = "https://github.com/";
 
         clearBrowserCookies();
@@ -27,27 +23,19 @@ public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
     }
 
     @Test
-
     void GithubSelenideWikiSearch() {
 
+        // На странице github, в поле поиска вводим "Selenide" и нажимаем клавишу 'Enter'
         $("[data-test-selector=nav-search-input]").setValue("Selenide").pressEnter();
-
+        // На странице с результатами поиска выбираем первый элемент из списка
         $$("ul.repo-list li").first().$("a").click();
-
-        $("[data-content='Wiki']").shouldBe(visible);
-
-        $("[data-content='Wiki']").click();
-
+        // На странице "selenide/selenide", на вкладке "< > Code" ищем вкладку "Wiki" и нажимаем на неё
+        $("[data-content='Wiki']").shouldBe(visible).click();
+        // На странице "selenide/selenide", на вкладке "Wiki", в меню "Pages" ищем кнопку "Show ... more pages.." и нажимаем на неё
         $(".js-wiki-more-pages-link").click();
-
-        sleep(3000);
-
-        $(byText("SoftAssertions")).shouldBe(visible);
-
-        sleep(3000);
-
-        $(byText("Soft assertions")).click();
-
+        // На странице "selenide/selenide", на вкладке "Wiki", в развернутом меню "Pages" ищем ссылку по тексту "SoftAssertions" и нажимаем на неё
+        $(byText("SoftAssertions")).shouldBe(visible).click();
+        // На странице "selenide/selenide", на вкладке "Wiki", в статье "SoftAssertions" ищем пример кода
         $("[start='3']").$(byText("Using JUnit5 extend test class:")).shouldBe(visible);
 
     }
