@@ -34,7 +34,7 @@ public class GithubSelenideWikiSoftAssertionsJUnit5CodeExampleSearch {
         // На странице "selenide/selenide", на вкладке "Wiki", в меню "Pages" ищем кнопку "Show ... more pages.." и нажимаем на неё
         $(".js-wiki-more-pages-link").click();
         // На странице "selenide/selenide", на вкладке "Wiki", в развернутом меню "Pages" ищем ссылку по тексту "SoftAssertions" и нажимаем на неё
-        $(byText("SoftAssertions")).shouldBe(visible).click();
+        $("#wiki-pages-box").$(byText("SoftAssertions")).click();
         // На странице "selenide/selenide", на вкладке "Wiki", в статье "SoftAssertions" ищем пример кода
         $("[start='3']").$(byText("Using JUnit5 extend test class:")).shouldBe(visible);
 
